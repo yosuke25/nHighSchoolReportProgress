@@ -1,15 +1,15 @@
 window.addEventListener('load', function () {
 
-  var sub = [];
+  let sub = [];
 
-  var el = [];
+  let el = [];
   el[0] = document.getElementsByClassName('subject_1st_row');
   el[1] = document.getElementsByClassName('subject_2st_row');
 
-  var lim = [];
+  let lim = [];
 
-  for (var subCnt = 0; subCnt < el[0].length; subCnt++) {
-    var ch = [];
+  for (let subCnt = 0; subCnt < el[0].length; subCnt++) {
+    let ch = [];
     ch[0] = el[0][subCnt].childNodes;
     ch[1] = el[1][subCnt * 2].childNodes;
 
@@ -28,25 +28,25 @@ window.addEventListener('load', function () {
 
     sub[subCnt].name = ch[0][1].innerHTML.split('<br>')[0];
 
-    for (var chCnt = 0; chCnt < ch[0].length; chCnt++) {
-      var chTxt = ch[0][chCnt].innerText;
+    for (let chCnt = 0; chCnt < ch[0].length; chCnt++) {
+      let chTxt = ch[0][chCnt].innerText;
       if ((ch[0][chCnt].className === 'report_limit_date') && (chTxt !== '-')) {
         sub[subCnt].rpt[Number(chTxt.split('/')[0])]++;
       }
     }
 
-    for (var chCnt = 0; chCnt < ch[1].length; chCnt++) {
-      var chTxt = ch[1][chCnt].innerText;
+    for (let chCnt = 0; chCnt < ch[1].length; chCnt++) {
+      let chTxt = ch[1][chCnt].innerText;
       if ((ch[1][chCnt].className === 'report_progress') && (chTxt.substr(-1, 1) === '%' && chTxt !== '-')) {
         sub[subCnt].prg.push(chTxt);
       }
     }
   }
 
-  for (var rptCnt = 0; rptCnt < 8; rptCnt++) {
-    var cnt = 0;
-    for (var subCnt = 0; subCnt < el[0].length; subCnt++) {
-      var rpt = sub[subCnt].rpt[rptCnt + 5];
+  for (let rptCnt = 0; rptCnt < 8; rptCnt++) {
+    let cnt = 0;
+    for (let subCnt = 0; subCnt < el[0].length; subCnt++) {
+      let rpt = sub[subCnt].rpt[rptCnt + 5];
       if (rpt > cnt) {
         cnt = rpt;
       }
@@ -75,9 +75,9 @@ window.addEventListener('load', function () {
 
 
 
-  var colAll = lim.reduce(function (x, y) { return x + y });
+  let colAll = lim.reduce(function (x, y) { return x + y });
 
-  var html = {};
+  let html = {};
   html[0] = ce(['table', 'border="1']);
   html[0][1][0] = ce(['tr']);
   html[0][1][0][1][0] = ce(['td', 'rowspan="2"'], '科目');
@@ -85,11 +85,11 @@ window.addEventListener('load', function () {
   html[0][1][1] = ce(['tr']);
 
 
-  for (var limCnt = 0; limCnt < lim.length; limCnt++) {
+  for (let limCnt = 0; limCnt < lim.length; limCnt++) {
     html[0][1][1][1][limCnt] = ce(['td', 'colspan="' + lim[limCnt] + '"'], limCnt + 5 + '/15');
   }
 
-  for (var trCnt = 0; trCnt < sub.length * 2; trCnt++) {
+  for (let trCnt = 0; trCnt < sub.length * 2; trCnt++) {
     html[0][1][trCnt + 2] = ce(['tr']);
   }
 
@@ -98,18 +98,18 @@ window.addEventListener('load', function () {
 
 
 
-  for (var subCnt = 0; subCnt < sub.length; subCnt++) {
+  for (let subCnt = 0; subCnt < sub.length; subCnt++) {
 
-    var idx = 0;
-    var rpt = 1;
+    let idx = 0;
+    let rpt = 1;
 
     html[0][1][(subCnt + 1) * 2][1][idx++] = ce(['td', 'rowspan="2"'], sub[subCnt].name);
 
-    for (var limCnt = 0, prg = 0; limCnt < 8; limCnt++) {
+    for (let limCnt = 0, prg = 0; limCnt < 8; limCnt++) {
 
       //let prg = 0;
 
-      for (var rptCnt = 0; rptCnt < sub[subCnt].rpt[limCnt + 5]; rptCnt++) {
+      for (let rptCnt = 0; rptCnt < sub[subCnt].rpt[limCnt + 5]; rptCnt++) {
         
         
         html[0][1][(subCnt + 1) * 2 + 1][1][idx - 1] = ce(['td'], sub[subCnt].prg[prg]);
@@ -122,7 +122,7 @@ window.addEventListener('load', function () {
 
       }
 
-      for (var rptCnt = 0; rptCnt < lim[limCnt] - sub[subCnt].rpt[limCnt + 5]; rptCnt++) {
+      for (let rptCnt = 0; rptCnt < lim[limCnt] - sub[subCnt].rpt[limCnt + 5]; rptCnt++) {
 
         html[0][1][(subCnt + 1) * 2 + 1][1][idx - 1] = '';
 
@@ -131,7 +131,7 @@ window.addEventListener('load', function () {
       }
 
       console.log(rpt);
-      
+
     }
 
   }
@@ -139,7 +139,7 @@ window.addEventListener('load', function () {
 
 
 
-  // for (var subCnt = 0; subCnt < sub.length; subCnt++) {
+  // for (let subCnt = 0; subCnt < sub.length; subCnt++) {
 
   //   for ()
   // }
