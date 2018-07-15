@@ -115,7 +115,7 @@ window.addEventListener('load', function () {
   let newWindowInnerHTML = '<!DOCTYPE html>' + createHTML(html);
 
   button.addEventListener('click', function () {
-    let newWindow = window.open(null, Math.random().toString(32).slice(-8), 'width=1000, height=570');
+    let newWindow = window.open(null, Math.random().toString(32).slice(-8), 'width=auto, height=auto');
     newWindow.document.body.innerHTML = newWindowInnerHTML;
   }, false);
 
